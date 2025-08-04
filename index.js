@@ -12,7 +12,8 @@ app.use(express.urlencoded({extended:false}));
 app.use("/api/products",productRoute);
 
 //mongoose connection
-mongoose.connect("mongodb+srv://dbUser33:dbUser33Password@nodeapicluster.prf8ipp.mongodb.net/node-api?retryWrites=true&w=majority&appName=nodeApiCluster").then(()=>{
+require('dotenv').config();
+mongoose.connect(process.env.MONGODB_URI).then(()=>{
     console.log("connected to database");
     app.listen(3000,()=>console.log("listening to the port 3000"));
 }).catch((err)=>{if(err) throw err;});
